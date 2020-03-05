@@ -86,6 +86,14 @@ class Coship
         $conn = $coreResource->getConnection();
 
 
+        // Quickfix for MRP shipping issue
+        // Thu Mar  5 10:31:32 2020
+        $sql = "update sales_order_item oi1,sales_order_item oi2
+            set oi1.qty_shipped=oi2.qty_shipped
+            where oi1.parent_item_id=oi2.item_id and oi1.qty_shipped<oi2.qty_shipped
+            and oi1.order_id>95000";
+        $conn->query($sql);
+        // *
 
         $sql = $conn->select()->from(
             array('o' => $coreResource->getTableName('sales_order')),
