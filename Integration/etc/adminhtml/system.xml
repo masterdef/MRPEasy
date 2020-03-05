@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="mrpeasy" translate="label" type="text" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>MRPEasy Integration</label>
+			<tab>service</tab>
+			<resource>MRPEasy_Integration::mrpeasy_config</resource>
+			<group id="integration" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+				<label>Integration Settings</label>
+				<field id="api_key" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>MRPEasy API key</label>
+					<comment>API key from MRPEasy -&gt; Settings -&gt; System settings -&gt; Integration -&gt; API access.</comment>
+				</field>
+				<field id="access_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>MRPEasy Access key</label>
+					<comment>Access key from MRPEasy -&gt; Settings -&gt; System settings -&gt; Integration -&gt; API access.</comment>
+				</field>
+				<field id="group_orders" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+					<source_model>MRPEasy\Integration\Model\SyncTypes</source_model>
+					<label>Send sales orders</label>
+					<comment><![CDATA[
+						<ul>
+							<li>separately - one sales order in Magento = one customer order in MRPEasy</li>
+							<li>group orders - one sales order in Magento = one line in customer order in MRPEasy</li>
+							<li>group products - sum up all products that are sold in Magento, one product = one line in customer order in MRPEasy</li>
+						</ul>
+					]]></comment>
+				</field>
+				<field id="inventory" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+					<source_model>MRPEasy\Integration\Model\NoYes</source_model>
+					<label>Update inventory levels in e-shop</label>
+				</field>
+				<field id="last_sync" translate="label comment" type="text" sortOrder="50" showInDefault="0" showInWebsite="0" showInStore="0">
+					<label>Last syncronization</label>
+				</field>
+				<field id="btn_sync" translate="label" type="button" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+					<frontend_model>MRPEasy\Integration\Block\BtnSync</frontend_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>
+
