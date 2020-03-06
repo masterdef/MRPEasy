@@ -156,3 +156,34 @@ class Coship
         }
     }
 }
+
+
+/** reference SQL code
+    Fri Mar  6 11:52:49 2020
+
+
+SELECT o.entity_id, o.mrpeasy_cust_ord_id, oi.item_id, mrpeasy_cust_line_id, oi.qty_shipped
+FROM sales_order o
+JOIN sales_order_item oi ON oi.order_id = o.entity_id
+-- AND oi.mrpeasy_cust_line_id IS NOT NULL
+-- AND oi.mrpeasy_shipment_id IS NULL
+-- AND oi.qty_shipped >= (oi.qty_ordered - oi.qty_refunded)
+WHERE
+-- o.state = 'complete' AND
+-- o.mrpeasy_cust_ord_id IS NOT NULL and
+mrpeasy_cust_line_id=2622;
+--
+
+select oi1.order_id,oi1.item_id,oi1.qty_shipped,oi2.item_id,oi2.qty_shipped
+from sales_order_item oi1,sales_order_item oi2
+where oi1.parent_item_id=oi2.item_id and oi1.qty_shipped<oi2.qty_shipped
+-- and oi1.order_id=94925
+;
+--
+update sales_order_item oi1,sales_order_item oi2
+set oi1.qty_shipped=oi2.qty_shipped
+where oi1.parent_item_id=oi2.item_id and oi1.qty_shipped<oi2.qty_shipped
+and oi1.order_id>95000;
+
+
+**/
